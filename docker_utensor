@@ -1,4 +1,4 @@
-FROM ubuntu:18.20
+FROM ubuntu:18.04
 LABEL maintainer="Dboy Liao <qmalliao@gmail.com>"
 
 ENV UTENSOR_CGEN_BRANCH=develop \
@@ -9,16 +9,26 @@ ENV UTENSOR_CGEN_BRANCH=develop \
 RUN apt-get update && \
     apt-get install -y \
     cmake \
+    git \
+    wget
+RUN apt-get install -y \
     python3.7\
-    git
-RUN pip3 install setuptools==39.0.1 \
-    python -m ensurepip
+    python3-pip
+
+RUN python3 -m pip install pip==19.0
+RUN python3.7 -m pip install pip==19.0
+
+RUN cd / &&\
+    wget https://raw.githubusercontent.com/matthis-guilleray/rep_test/master/requirement.txt && \
+    pip install -r /requirement.txt
+    
+
 RUN cd /root && \
     git clone https://github.com/uTensor/utensor_cgen.git && \
     cd utensor_cgen && \
     git checkout ${UTENSOR_CGEN_BRANCH} && \
-    wget 
-    pip3 install -r requirements.txt
+    python3.7 setup.py install
+    
 
 WORKDIR /root
 

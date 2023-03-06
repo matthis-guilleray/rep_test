@@ -21,7 +21,7 @@ docutils==0.16
 entrypoints==0.3
 flake8==3.7.9
 flatbuffers==1.12
-gast==0.2.2
+gast==0.3.3
 google-auth==1.14.1
 google-auth-oauthlib==0.4.1
 google-pasta==0.2.0
